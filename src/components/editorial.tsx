@@ -13,7 +13,13 @@ export default function Editorial({ title, category, image, date, author, featur
           </div>
     
           <style jsx>{`
+                  .post {
+                    display: inline-block;
+                    width: 320px;
+                  }
             .editorial {
+              display: inline-block;
+              width: 320px;
               position: relative;
               margin: 10px;
               width: 300px;
