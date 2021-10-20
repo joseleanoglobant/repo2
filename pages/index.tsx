@@ -19,7 +19,7 @@ export default function Home({ editorial }) {
         <div className="posts">
 
           {editorial.map((p) => {
-            return <Editorial title={p.title} category={p.category} date={p.date} image={p.editorialImage.fields} author={p.author} featured={p.featured} order={p.order}/>
+            return <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author}/>
           })}
 
         </div>
@@ -32,6 +32,7 @@ export default function Home({ editorial }) {
 export async function getStaticProps() {
   const res = await fetchEntries()
   const editorial = await res.map((p) => {
+    console.log(res);
     return p.fields
   })
 
