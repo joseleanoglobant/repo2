@@ -23,6 +23,9 @@ export default function MostPopular({ title, category, date, image, author, slug
           width: 333px;
           margin: 20px;
         }
+        .post--poular:hover {
+          box-shadow: rgba(0 0 0 0.25) 0px 5px 20px 5px;
+        }
         .post--popular .post__title {
           color: rgb(42, 48, 57);
           font-size: 22px;

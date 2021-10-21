@@ -17,14 +17,14 @@ export default function Home({ editorial }) {
       </Head>
 
       <main>
-        <div className="editorial">
+        <div className="contentful-section editorial">
           <div className="editorial__primary">
           {
             <Editorial title={editorial[0].title} category={editorial[0].category} date={editorial[0].publishedDate} image={editorial[0].featuredImage.fields} author={editorial[0].author} slug={editorial[0].slug} body={editorial[0].body} type="1"/>       
           }
           </div>
           <div className="editorial__secondary">
-            {editorial.slice(1, 4).map((p, i) => {
+            {editorial.slice(1, 4).map((p:object, i:number) => {
                 return(
                   <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} type="2"/>       
                 ) 
@@ -34,8 +34,18 @@ export default function Home({ editorial }) {
         </div>
         <h2 className="section-title">MOST POPULAR</h2>
 
-        <div className="most-popular">
+        <div className="contentful-section most-popular">
           {editorial.slice(0, 6).map((p, i) => {
+            return (
+              <MostPopular title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} index={i}/>       
+            )       
+          })}
+        </div>
+
+        <h2 className="section-title">BROWSE ALL</h2>
+
+        <div className="contentful-section browse-all">
+          {editorial.slice(0, 9).map((p, i) => {
             return (
               <MostPopular title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} index={i}/>       
             )       
@@ -55,19 +65,14 @@ export default function Home({ editorial }) {
             max-width: 1200px;
             margin: 0 auto;
           }
-          .editorial {
+          .contentful-section {
             display: flex;
             width: 100%;
             max-width: 1080px;
             margin: 20px auto;
             justify-content: space-between;
           }
-          .most-popular {
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            max-width: 1120px;
-            margin: 20px auto;
+          .contenful-section.most-popular {
             justify-content: center;
           }
           .section-title {
