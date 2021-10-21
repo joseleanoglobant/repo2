@@ -49,7 +49,7 @@ export default function Editorial({ title, category, date, image, author, slug, 
           font-size: 16px;
           color: rgb(42, 48, 57);
         }
-        .post--secondary {
+        .post.post--secondary {
           display: flex;
           justify-content: space-between;
           width: 35%;
@@ -59,7 +59,7 @@ export default function Editorial({ title, category, date, image, author, slug, 
         }
         .post--secondary .post__img {
           display: inline-block;
-          width: 195px;
+          width: 190px;
           height: 90px;
         }
         .post--secondary .post__info {

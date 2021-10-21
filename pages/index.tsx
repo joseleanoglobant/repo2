@@ -24,6 +24,15 @@ export default function Home({ editorial }) {
             )       
           })}
         </div>
+        <h2 className="section-title">MOST POPULAR</h2>
+
+        <div className="most-popular">
+          {editorial.map((p, i) => {
+            return (
+              <MostPopular title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} index={i}/>       
+            )       
+          })}
+        </div>
       </main>
       <>
         <style jsx global>{`
@@ -34,6 +43,9 @@ export default function Home({ editorial }) {
           main {
             background: #fff;
             padding: 80px 0;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
           }
           .editorial {
             display: flex;
@@ -41,6 +53,19 @@ export default function Home({ editorial }) {
             max-width: 1080px;
             margin: 20px auto;
             justify-content: space-between;
+          }
+          .most-popular {
+            display: flex;
+            width: 100%;
+            max-width: 1120px;
+            margin: 20px auto;
+            justify-content: center;
+          }
+          .section-title {
+            display: inline-block;
+            font-size: 31px;
+            margin-left: 60px;
+            background-image: linear-gradient(-180deg, transparent 0%, transparent 64%, rgb(255, 216, 95) 64%, rgb(255, 216, 95) 87%, transparent 87%, transparent 100%);
           }
       `}</style>
     </>
