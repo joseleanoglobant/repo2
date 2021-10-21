@@ -1,7 +1,7 @@
-export default function Editorial({ title, category, date, image, author, slug, body, index}) {
+export default function Editorial({ title, category, date, image, author, slug, body, type}) {
   let { file, description } = image
-  let postType = index === 0 ? 'post--featured' : 'post--secondary'
-  return (
+  let postType = type == 1 ? 'post--featured' : 'post--secondary'
+  return ( 
     <div className={`post ${postType}`}>
       <img width="100%" height="auto" className="post__img" alt={description} src={`https:${file.url}`} />
       <div className="post__info">
@@ -25,7 +25,6 @@ export default function Editorial({ title, category, date, image, author, slug, 
           background: rgba(255, 255, 255, 0.74);
         }
         .post--featured {
-          width: calc(65% - 40px);
           position: relative;
         }
         .post--featured .post__title {
@@ -52,8 +51,9 @@ export default function Editorial({ title, category, date, image, author, slug, 
         .post.post--secondary {
           display: flex;
           justify-content: space-between;
-          width: 35%;
-          height: 90px;
+          width: 100%;
+          height: 101px;
+          margin-bottom: 40px;
           overflow: hiddcen;
           text-overflow: ellipsis;
         }

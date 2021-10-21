@@ -18,16 +18,24 @@ export default function Home({ editorial }) {
 
       <main>
         <div className="editorial">
-          {editorial.map((p, i) => {
-            return (
-              <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} index={i}/>       
-            )       
-          })}
+          <div className="editorial__primary">
+          {
+            <Editorial title={editorial[0].title} category={editorial[0].category} date={editorial[0].publishedDate} image={editorial[0].featuredImage.fields} author={editorial[0].author} slug={editorial[0].slug} body={editorial[0].body} type="1"/>       
+          }
+          </div>
+          <div className="editorial__secondary">
+            {editorial.slice(1, 4).map((p, i) => {
+                return(
+                  <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} type="2"/>       
+                ) 
+            })}
+          </div>
+         
         </div>
         <h2 className="section-title">MOST POPULAR</h2>
 
         <div className="most-popular">
-          {editorial.map((p, i) => {
+          {editorial.slice(0, 6).map((p, i) => {
             return (
               <MostPopular title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} index={i}/>       
             )       
@@ -56,6 +64,7 @@ export default function Home({ editorial }) {
           }
           .most-popular {
             display: flex;
+            flex-wrap: wrap;
             width: 100%;
             max-width: 1120px;
             margin: 20px auto;
@@ -66,6 +75,12 @@ export default function Home({ editorial }) {
             font-size: 31px;
             margin-left: 60px;
             background-image: linear-gradient(-180deg, transparent 0%, transparent 64%, rgb(255, 216, 95) 64%, rgb(255, 216, 95) 87%, transparent 87%, transparent 100%);
+          }
+          .editorial__primary{
+            width: calc(65% - 40px);
+          }
+          .editorial__secondary{
+            width: 35%;
           }
       `}</style>
     </>
