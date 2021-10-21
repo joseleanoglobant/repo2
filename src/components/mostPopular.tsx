@@ -2,7 +2,7 @@ export default function MostPopular({ title, category, date, image, author, slug
     let { file, description } = image
 
     return (
-        <div className="post--popular">
+        <div className="post__section-popular">
             <img width="100%" height="auto" className="post__img" alt={description} src={`https:${file.url}`} />
             <div className="post__info">
                 <span className="post__category">{category}</span>
