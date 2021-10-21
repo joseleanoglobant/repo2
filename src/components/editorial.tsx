@@ -1,71 +1,54 @@
-export default function Editorial({ title, category, image, date, author, featured, order}) {
-    let { file, description } = image
-    let main = featured ? 'main editorial' : 'editorial';
-
-
-    return (
-        <div className={main}>
-          <img alt={description} src={`https:${file.url}`} />
-          <div className="description">{description}</div>
-          <div className="text">
-            <h2>{title}</h2>
-            <h3>{date.substring(0, 10)}</h3>
-          </div>
-    
-          <style jsx>{`
-                  .post {
-                    display: inline-block;
-                    width: 320px;
-                  }
-            .editorial {
-              display: inline-block;
-              width: 320px;
-              position: relative;
-              margin: 10px;
-              width: 300px;
-              color: white;
-              cursor: pointer;
-            }
-            .description {
-              position: absolute;
-              top: 0;
-              padding: 10px;
-              box-sizing: border-box;
-              background: linear-gradient(0deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 100%);
-              height: 100px;
-              opacity: 0;
-              transition: opacity 0.5s;
-            }
-            .post:hover .description {
-              opacity: 1;
-            }
-            .text {
-              position: absolute;
-              bottom: 3px;
-              padding: 10px;
-              box-sizing: border-box;
-              width: 100%;
-              height: 70px;
-              background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0) 100%);
-            }
-            h2,
-            h3 {
-              margin: 5px;
-            }
-            h2 {
-              margin-bottom: 0;
-            }
-            h3 {
-              margin-top: 0;
-              font-size: 0.8em;
-              font-weight: 400;
-            }
-            img {
-              max-width: 300px;
-            }
-          `}</style>
+export default function Editorial({ title, category, date, image, author, index}) {
+  let { file, description } = image
+  let postType = index === 0 ? 'post--featured' : 'post--secondary'
+  return (
+    <div className={`post ${postType}`}>
+      <img width="100%" height="auto" className="post__img" alt={description} src={`https:${file.url}`} />
+      <div className="post__info">
+        <span className="post__category">{category}</span>
+        <h3 className="post__title">{title}</h3>
+        <div className="publisher">
+          <span className="post__date">{date}</span>
+          <span className="post__author">{author}</span>
         </div>
-      )
-    }
+      </div>
+      <style jsx global>{`
+        .post {
+          display: inline-block;
+          position: relative;
+        }
+        .post__info {
+          position: absolute;
+          left:0;
+          bottom: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.74);
+        }
+        .post--featured {
+          width: 70%;
+        }
+        .post--featured .post__title {
+          color: rgb(0, 60, 190);
+          font-size: 22px;
+        }
+        .post--featured .post__category {
+          color: rgb(11, 106, 230);
+          font-size: 22px;
+        }
+        .post--featured .publisher span {
+          color: rgb(11, 106, 230);
+          font-size: 22px;
+        }
+        .post--secondary {
+          width: 30%;
+        }
+        .post--secondary .post__title {
+          font-size: 16px;
+        }
+      `}</style>
+    </div>
+  )
+}
+
 
 

@@ -12,67 +12,31 @@ export default function Home({ editorial }) {
   return (
     <div className="container">
       <Head>
-        <title>Happy Birthday!</title>
+        <title>Contentful Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-
-        <div className="posts">
-        <style jsx>{`
-                .posts {
-                    display: flex;
-                    justify-content: space-between;
-                    max-width: 1200px;
-                  }
-              `}</style>
-          {editorial.map((p) => {
+        <div className="editorial">
+          {editorial.map((p, i) => {
             return (
-              <div class='post'>
-                <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author}/>
-     
-              </div>
-            )
+              <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} index={i}/>       
+            )       
           })}
         </div>
-        <div className="most-popular">
-        <style jsx>{`
-                .posts {
-                    display: flex;
-                    justify-content: space-between;
-                    max-width: 1200px;
-                  }
-              `}</style>
-          {editorial.map((p) => {
-            return (
-              <div class='post'>
-                <MostPopular title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author}/>
-     
-              </div>
-            )
-          })}
-        </div>
-
-        <div className="browse-all">
-        <style jsx>{`
-                .posts {
-                    display: flex;
-                    justify-content: space-between;
-                    max-width: 1200px;
-                  }
-              `}</style>
-          {editorial.map((p) => {
-            return (
-              <div class='post'>
-                <BrowseAll title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author}/>
-     
-              </div>
-            )
-          })}
-        </div>
-
       </main>
-
+      <>
+        <style jsx global>{`
+          .editorial {
+            display: flex;
+            width: 100%;
+            max-width: 1080px;
+            margin: 20px auto;
+            justify-content: space-between;
+            background: #eee;
+          }
+      `}</style>
+    </>
     </div>
   )
 }
