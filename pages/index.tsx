@@ -20,20 +20,27 @@ export default function Home({ editorial }) {
         <div className="editorial">
           {editorial.map((p, i) => {
             return (
-              <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} index={i}/>       
+              <Editorial title={p.title} category={p.category} date={p.publishedDate} image={p.featuredImage.fields} author={p.author} slug={p.slug} body={p.body} index={i}/>       
             )       
           })}
         </div>
       </main>
       <>
         <style jsx global>{`
+          body {
+            background: rgb(242, 248, 251);
+            font-family: "Gill Sans", "Gill Sans MT", Calibri;
+          }
+          main {
+            background: #fff;
+            padding: 80px 0;
+          }
           .editorial {
             display: flex;
             width: 100%;
             max-width: 1080px;
             margin: 20px auto;
             justify-content: space-between;
-            background: #eee;
           }
       `}</style>
     </>
