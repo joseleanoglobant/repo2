@@ -1,6 +1,14 @@
-export default function Editorial({ title, category, date, image, author, slug, body, type}) {
-  let { file, description } = image
-  let postType = type == 1 ? 'post--featured' : 'post--secondary'
+import { ContentfulPost } from '../../utils/contentfulPosts'
+
+interface IEditorial {
+  post: ContentfulPost
+  type: number
+}
+
+export default function Editorial({ post, type }: IEditorial) {
+  const { category, slug, title, publishedDate: date, author } = post
+  let { file, description } = post.featuredImage.fields
+  let postType = type === 1 ? 'post--featured' : 'post--secondary'
   return ( 
     <div className={`post ${postType}`}>
       <img width="100%" height="auto" className="post__img" alt={description} src={`https:${file.url}`} />

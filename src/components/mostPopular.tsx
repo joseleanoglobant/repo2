@@ -1,5 +1,12 @@
-export default function MostPopular({ title, category, date, image, author, slug, body, index}) {
-    let { file, description } = image
+
+import { ContentfulPost } from '../../utils/contentfulPosts'
+interface IMostPopular {
+  post: ContentfulPost
+}
+
+export default function MostPopular({ post }: IMostPopular) {
+  const { title, category, publishedDate: date, featuredImage, author, slug} = post
+    let { file, description } = featuredImage.fields
 
     return (
         <div className="post--popular">

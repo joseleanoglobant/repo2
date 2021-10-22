@@ -1,18 +1,20 @@
-export default function BrowseAll({ title, category, image, date, author, featured, order}) {
-    let { file, description } = image
-    let main = featured ? 'main editorial' : 'editorial';
+import { ContentfulPost } from "../../utils/contentfulPosts";
+interface IBrowseAll {
+  post: ContentfulPost;
+}
 
+export default function BrowseAll({ post }: IBrowseAll) {
+  const { title, featuredImage } = post;
+  let { file, description } = featuredImage.fields;
+  let main = "editorial";
 
-    return (
-        <div className={main}>
-          <img alt={description} src={`https:${file.url}`} />
-          <div className="description">{description}</div>
-          <div className="text">
-            <h2>{title}</h2>
-            <h3>{date.substring(0, 10)}</h3>
-          </div>
-        </div>
-      )
-    }
-
-
+  return (
+    <div className={main}>
+      <img alt={description} src={`https:${file.url}`} />
+      <div className="description">{description}</div>
+      <div className="text">
+        <h2>{title}</h2>
+      </div>
+    </div>
+  );
+}
