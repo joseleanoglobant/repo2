@@ -1,15 +1,36 @@
-const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
+import { createClient, CreateClientParams, EntryCollection, Asset } from "contentful";
 
-const client = require('contentful').createClient({
+const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+  ? process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+  : "";
+const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
+  ? process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
+  : "";
+
+const clientParams: CreateClientParams = {
   space: space,
   accessToken: accessToken,
-})
+};
 
-export async function fetchEntries() {
-  const entries = await client.getEntries()
-  if (entries.items) return entries.items
-  console.log(`Error getting Entries for ${contentType.name}.`)
+const client = createClient(clientParams);
+
+export interface ContentfulPost {
+  name: string
+  title: string
+  category: string
+  publishedDate: string
+  featuredImage: Asset
+  author: string
+  slug: string
+  body: string
 }
 
-export default { fetchEntries }
+export async function fetchEntries() {
+  const entries: EntryCollection<ContentfulPost> = await client.getEntries();
+  if (entries.items) return entries.items;
+  console.log(`Error getting Contentful entries.`);
+
+  return []
+}
+
+export default { fetchEntries };
