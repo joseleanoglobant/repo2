@@ -2,16 +2,18 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { ContentfulPost, fetchEntries } from "../utils/contentfulPosts";
+import { ContentfulPost, fetchEntries, format } from "../utils/contentfulPosts";
 import Editorial from "../src/components/editorial";
 import MostPopular from "../src/components/mostPopular";
 import BrowseAll from "../src/components/browseAll";
+import IPost from '../src/components/Post/index'
 
-interface PostProps {
-  posts: ContentfulPost[];
-}
 
-export default function Home({ posts }: PostProps) {
+
+export default function Home({ posts }: IPost[]) {
+
+//console.log(posts);
+
   return (
     <div className="container">
       <Head>
@@ -20,21 +22,18 @@ export default function Home({ posts }: PostProps) {
       </Head>
 
       <main>
-        <Editorial post={posts} type={1}/>
+        <Editorial content={posts}/>
+
         <h2 className="section-title">MOST POPULAR</h2>
 
         <div className="contentful-section most-popular">
-          {posts.slice(0, 6).map((p, i) => {
-            return <MostPopular key={i} post={p} />;
-          })}
+   
         </div>
 
         <h2 className="section-title">BROWSE ALL</h2>
 
         <div className="contentful-section browse-all">
-          {posts.slice(0, 9).map((p, i) => {
-            return <MostPopular key={i} post={p} />;
-          })}
+        
         </div>
       </main>
       <>
@@ -82,3 +81,17 @@ export default function Home({ posts }: PostProps) {
 }
 
 
+export async function getStaticProps() {
+  const res = await fetchEntries();
+  const posts = await res.map((p) => {
+
+    const item  = format(p.fields);
+    //console.log(item);
+    return item;
+  });
+  return {
+    props: {
+      posts,
+    },
+  };
+}

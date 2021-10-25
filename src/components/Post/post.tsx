@@ -1,6 +1,6 @@
 import IPost from '../Post/index';
 
-export default function Post({ title, category, publishedDate, imageUrl, slug, author }: IPost, type: number) {
+export default function Post({ title, category, publishedDate, imageAlt, imageUrl, slug, author }: IPost, type: number) {
 
   let postType = type === 1 ? 'post--featured' : 'post--secondary'
 
@@ -8,7 +8,7 @@ export default function Post({ title, category, publishedDate, imageUrl, slug, a
     <div className={`post ${postType}`}>
         <div className="post__image">
             <a href={slug}>
-                <img width="100%" height="auto" className="post__img" src={`https:${imageUrl}`} />
+                <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
             </a>
         </div>
         <div className="post__info">
