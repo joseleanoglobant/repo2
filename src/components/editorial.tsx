@@ -1,13 +1,9 @@
-import { ContentfulPost, getStaticProps } from '../../utils/contentfulPosts';
+import { ContentfulPost } from '../../utils/contentfulPosts';
 import Post from '../components/Post/post';
+import IPost from '../components/Post/index';
 
 
-interface IEditorial {
-  post: ContentfulPost
-  type: number
-}
-
-export default function Editorial({ post, type }: IEditorial) {
+export default function Editorial(post : IPost) {
 
   //const { category, slug, title, publishedDate: date, author } = post
 

@@ -1,4 +1,3 @@
-import { ContentfulPost } from '../../../utils/contentfulPosts';
 import IPost from '../Post/index';
 
 export default function Post({ title, category, publishedDate, imageUrl, slug, author }: IPost, type: number) {
@@ -100,6 +99,7 @@ export default function Post({ title, category, publishedDate, imageUrl, slug, a
     </div>
   )
 }
+
 
 
 
