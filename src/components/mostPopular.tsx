@@ -8,7 +8,7 @@ interface IMostPopular {
 export default function MostPopular({ content }: IMostPopular) {
 
     return (
-      <div>
+      <>
         <h2 className="section-title">MOST POPULAR</h2>
         <div className="contentful-section most-popular">      
           {content.slice(0, 6).map((p, i) => {
@@ -22,7 +22,7 @@ export default function MostPopular({ content }: IMostPopular) {
               flex-wrap: wrap;
             }
           `}</style>
-      </div>
+      </>
       )
     }
 
