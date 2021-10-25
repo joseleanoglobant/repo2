@@ -2,16 +2,16 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { fetchEntries, ContentfulPost } from "../utils/contentfulPosts";
+import { ContentfulPost, getStaticProps } from "../utils/contentfulPosts";
 import Editorial from "../src/components/editorial";
 import MostPopular from "../src/components/mostPopular";
 import BrowseAll from "../src/components/browseAll";
 
-interface HomeProps {
+interface PostProps {
   posts: ContentfulPost[];
 }
 
-export default function Home({ posts }: HomeProps) {
+export default function Home({ posts }: PostProps) {
   return (
     <div className="container">
       <Head>
@@ -20,16 +20,7 @@ export default function Home({ posts }: HomeProps) {
       </Head>
 
       <main>
-        <div className="contentful-section editorial">
-          <div className="editorial__primary">
-            {<Editorial post={{ ...posts[0] }} type={1} />}
-          </div>
-          <div className="editorial__secondary">
-            {posts.slice(1, 4).map((p, i) => {
-              return <Editorial key={i} post={p} type={2} />;
-            })}
-          </div>
-        </div>
+        <Editorial post={posts} type={1}/>
         <h2 className="section-title">MOST POPULAR</h2>
 
         <div className="contentful-section most-popular">
@@ -83,28 +74,10 @@ export default function Home({ posts }: HomeProps) {
               transparent 100%
             );
           }
-          .editorial__primary {
-            width: calc(65% - 40px);
-          }
-          .editorial__secondary {
-            width: 35%;
-          }
+
         `}</style>
       </>
     </div>
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetchEntries();
-  const posts = await res.map((p) => {
-    console.log(res);
-    return p.fields;
-  });
-
-  return {
-    props: {
-      posts,
-    },
-  };
-}

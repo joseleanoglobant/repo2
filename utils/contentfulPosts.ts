@@ -25,7 +25,7 @@ export interface ContentfulPost {
   body: string
 }
 
-export async function fetchEntries() {
+export default async function fetchEntries() {
   const entries: EntryCollection<ContentfulPost> = await client.getEntries();
   if (entries.items) return entries.items;
   console.log(`Error getting Contentful entries.`);
@@ -33,4 +33,17 @@ export async function fetchEntries() {
   return []
 }
 
-export default { fetchEntries };
+export async function getStaticProps() {
+  const res = await fetchEntries();
+  const posts = await res.map((p) => {
+    console.log(res);
+    return p.fields;
+  });
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
