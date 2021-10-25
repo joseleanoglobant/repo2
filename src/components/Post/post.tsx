@@ -1,24 +1,24 @@
 import IPost from '../Post/index';
 
-export default function Post({ title, category, publishedDate, imageAlt, imageUrl, slug, author }: IPost, type: number) {
+export default function Post(props: IPost) {
 
-  let postType = type === 1 ? 'post--featured' : 'post--secondary'
+  let { title, category, publishedDate, imageAlt, imageUrl, slug, author, type } = props;
 
-  return ( 
-    <div className={`post ${postType}`}>
-        <div className="post__image">
-            <a href={slug}>
-                <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
-            </a>
+  return (
+    <div className={`post post--${type}`}>
+      <div className="post__image">
+        <a href={slug}>
+          <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
+        </a>
+      </div>
+      <div className="post__info">
+        <span className="post__category">{category}</span>
+        <h3 className="post__title"><a href={slug}>{title}</a></h3>
+        <div className="publisher">
+          <span className="post__date">{publishedDate}</span>
+          <span className="post__author">{author}</span>
         </div>
-        <div className="post__info">
-            <span className="post__category">{category}</span>
-            <h3 className="post__title"><a href={slug}>{title}</a></h3>
-            <div className="publisher">
-                <span className="post__date">{publishedDate}</span>
-                <span className="post__author">{author}</span>
-            </div>
-        </div>
+      </div>
 
       <style jsx global>{`
         .post {

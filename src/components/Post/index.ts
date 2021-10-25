@@ -7,4 +7,5 @@ export default interface IPost {
     imageUrl: string
     slug: string
     author: string
+    type?: 'featured'| 'secondary'| 'standard'
 }

@@ -8,11 +8,13 @@ import MostPopular from "../src/components/mostPopular";
 import BrowseAll from "../src/components/browseAll";
 import IPost from '../src/components/Post/index'
 
+interface HomeProps {
+  posts: IPost[];
+}
 
+export default function Home({ posts }: HomeProps) {
 
-export default function Home({ posts }: IPost[]) {
-
-//console.log(posts);
+console.log(posts);
 
   return (
     <div className="container">
@@ -86,7 +88,6 @@ export async function getStaticProps() {
   const posts = await res.map((p) => {
 
     const item  = format(p.fields);
-    //console.log(item);
     return item;
   });
   return {

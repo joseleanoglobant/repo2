@@ -1,19 +1,20 @@
 import Post from '../components/Post/post';
 import IPost from '../components/Post/index';
 
+interface IEditorial {
+  content: IPost[]
+}
 
-export default function Editorial(content : IPost[]) {
 
-  console.log(content);
-  //const { category, slug, title, publishedDate: date, author } = post
+export default function Editorial({ content }: IEditorial) {
 
-  return ( 
+  return (
     <div className="contentful-section editorial">
       <div className="editorial__primary">
-        <Post post={content} type={1} />
+        <Post {...content[0]} type='featured' />
       </div>
       <div className="editorial__secondary">
- 
+
       </div>
     </div>
   )
