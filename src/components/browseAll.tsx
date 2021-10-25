@@ -1,20 +1,20 @@
-import { ContentfulPost } from "../../utils/contentfulPosts";
+import Post from '../components/Post/post';
+import IPost from '../components/Post/index';
+
 interface IBrowseAll {
-  post: ContentfulPost;
+  content:  IPost[]
 }
 
-export default function BrowseAll({ post }: IBrowseAll) {
-  const { title, featuredImage } = post;
-  let { file, description } = featuredImage.fields;
-  let main = "editorial";
+export default function BrowseAll({ content }: IBrowseAll) {
 
   return (
-    <div className={main}>
-      <img alt={description} src={`https:${file.url}`} />
-      <div className="description">{description}</div>
-      <div className="text">
-        <h2>{title}</h2>
+    <>
+      <h2 className="section-title">BROWSE ALL</h2>
+      <div className="contentful-section most-popular">
+        {content.slice(0, 9).map((p, i) => {
+            return <Post {...p} type='standard' />;
+        })}
       </div>
-    </div>
+    </>
   );
 }

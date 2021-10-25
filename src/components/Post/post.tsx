@@ -32,6 +32,14 @@ export default function Post(props: IPost) {
             width: 100%;
             background: rgba(255, 255, 255, 0.74);
           }
+          .post.post--standard {
+            width: 30%;
+            flex-grow: revert;
+            margin-bottom: 40px;
+          }
+          .post.post--standard .post__info{
+            padding: 20px;
+          }
           .post--featured {
             position: relative;
           }
@@ -45,8 +53,10 @@ export default function Post(props: IPost) {
             font-size: 22px;
             margin: 0;
           }
-          .post--featured .post__category {
+          .post__category {
             color: rgb(11, 106, 230);
+          }
+          .post--featured .post__category {
             font-size: 16px;
           }
           .post--featured .publisher span {
@@ -61,14 +71,16 @@ export default function Post(props: IPost) {
             justify-content: space-between;
             width: 100%;
             height: 101px;
-            margin-bottom: 40px;
             overflow: hiddcen;
             text-overflow: ellipsis;
           }
           .post--secondary .post__img {
             display: inline-block;
-            width: 190px;
-            height: 90px;
+            width: 173px;
+            height: auto;
+          }
+          .post--secondary .post__image a {
+            display: inline-block;
           }
           .post--secondary .post__info {
             display: inline-block;
@@ -84,7 +96,6 @@ export default function Post(props: IPost) {
             font-weight: 400;
             margin: 0;
             overflow: hidden;
-            height: 60px;
           }
           .post--secondary .post__title a{
             text-overflow: ellipsis;

@@ -14,8 +14,6 @@ interface HomeProps {
 
 export default function Home({ posts }: HomeProps) {
 
-console.log(posts);
-
   return (
     <div className="container">
       <Head>
@@ -25,24 +23,14 @@ console.log(posts);
 
       <main>
         <Editorial content={posts}/>
-
-        <h2 className="section-title">MOST POPULAR</h2>
-
-        <div className="contentful-section most-popular">
-   
-        </div>
-
-        <h2 className="section-title">BROWSE ALL</h2>
-
-        <div className="contentful-section browse-all">
-        
-        </div>
+        <MostPopular content={posts}/>
+        <BrowseAll content={posts}/>
       </main>
       <>
         <style jsx global>{`
           body {
             background: rgb(242, 248, 251);
-            font-family: "Gill Sans", "Gill Sans MT", Calibri;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
           }
           main {
             background: #fff;
@@ -56,15 +44,11 @@ console.log(posts);
             width: 100%;
             max-width: 1080px;
             margin: 20px auto;
-            justify-content: space-between;
-          }
-          .contenful-section.most-popular {
-            justify-content: center;
           }
           .section-title {
             display: inline-block;
             font-size: 31px;
-            margin-left: 60px;
+            margin-left: 80px;
             background-image: linear-gradient(
               -180deg,
               transparent 0%,
