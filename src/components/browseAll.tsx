@@ -1,5 +1,6 @@
 import Post from '../components/Post/post';
 import IPost from '../components/Post/index';
+import Dropdown from './dropdown';
 
 interface IBrowseAll {
   content:  IPost[]
@@ -7,9 +8,23 @@ interface IBrowseAll {
 
 export default function BrowseAll({ content }: IBrowseAll) {
 
-  return (
+  const categories: string[] = [];
+
+  content.map((p) => {
+    if(categories.indexOf(p.category) === -1 ){
+      categories.push(p.category);
+    }
+    else {
+      console.log("category already in array");
+    }
+  });
+
+  return (  
     <>
-      <h2 className="section-title">BROWSE ALL</h2>
+      <div className="section-title-container">
+        <h2 className="section-title">BROWSE ALL</h2>
+        <Dropdown list={categories}/>
+      </div>
       <div className="contentful-section browse-all">
         {content.slice(0, 9).map((p, i) => {
             return <Post {...p} type='standard' />;
@@ -21,6 +36,12 @@ export default function BrowseAll({ content }: IBrowseAll) {
               display: flex;
               justify-content: space-around;
               flex-wrap: wrap;
+            }
+            .section-title-container {
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              margin: 0 auto;
             }
             .browse-all__load-more {
               position: relative;
