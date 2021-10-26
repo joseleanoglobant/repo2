@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 
 interface IDropdown {
-    list: string[]
+    list: string[],
+    filter: React.Dispatch<SetStateAction<string>>
 }
 
-export default function Dropdown({ list }: IDropdown) {
+export default function Dropdown({ list, filter}: IDropdown) {
 
     const [isActive, setActive] = useState("false");
 
     const handleToggle = () => {
         setActive(!isActive);
     };
+
+    const dropdownSelect = (opt:string) => {
+        return opt
+    }
 
     return (
         <div className="dropdown">
@@ -19,9 +24,14 @@ export default function Dropdown({ list }: IDropdown) {
                     <li>
                         <div className="dropdown__placeholder">Select a category</div>
                     </li>
+                    <li>
+                        <span className="dropdown__option" onClick={() => {filter('')}}>BROWSE ALL</span>
+                    </li>
 
-                    {list.map((p:string) => {
-                        return <li><a className="dropdown__option">{p}</a></li>
+                    {list.map((p:string, i) => {
+                        return <li key={p}><span className="dropdown__option" onClick={() => {
+                            filter(p);
+                        }}>{p}</span></li>
                     })}
                 </ul>
                 <style jsx global>{`
@@ -85,7 +95,7 @@ export default function Dropdown({ list }: IDropdown) {
                         transition: box-shadow 0.1s ease 0s, max-height 0.25s ease 0s;
                         background-color: rgb(255, 255, 255);
                     }
-                    .dropdown__list li a {
+                    .dropdown__list li span {
                         color: inherit;
                         font-size: 14px;
                         line-height: 1;
@@ -93,7 +103,6 @@ export default function Dropdown({ list }: IDropdown) {
                         cursor: pointer;
                         border-top: 1px solid rgb(238, 242, 244);
                         display: block;
-                        text-transform: lowercase;
                     }
                 `}</style>
             </div >

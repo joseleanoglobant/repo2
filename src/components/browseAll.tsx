@@ -1,6 +1,7 @@
 import Post from '../components/Post/post';
 import IPost from '../components/Post/index';
 import Dropdown from './dropdown';
+import React, { useState } from "react";
 
 interface IBrowseAll {
   content:  IPost[]
@@ -9,6 +10,7 @@ interface IBrowseAll {
 export default function BrowseAll({ content }: IBrowseAll) {
 
   const categories: string[] = [];
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   content.map((p) => {
     if(categories.indexOf(p.category) === -1 ){
@@ -23,10 +25,13 @@ export default function BrowseAll({ content }: IBrowseAll) {
     <>
       <div className="section-title-container">
         <h2 className="section-title">BROWSE ALL</h2>
-        <Dropdown list={categories}/>
+        <Dropdown list={categories} filter={setCategoryFilter}/>
       </div>
       <div className="contentful-section browse-all">
-        {content.slice(0, 9).map((p, i) => {
+        {content.filter((val)=>{
+          if(categoryFilter === '' || val.category.toLowerCase() === categoryFilter.toLowerCase()) {
+            return val
+          }}).slice(0, 9).map((p, i) => {
             return <Post {...p} type='standard' />;
         })}
       </div>
@@ -34,7 +39,7 @@ export default function BrowseAll({ content }: IBrowseAll) {
       <style jsx global>{`
             .browse-all {
               display: flex;
-              justify-content: space-around;
+              justify-content: space-between;
               flex-wrap: wrap;
             }
             .section-title-container {
