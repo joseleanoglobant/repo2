@@ -1,61 +1,28 @@
+import Post from '../components/Post/post';
+import IPost from '../components/Post/index';
 
-import { ContentfulPost } from '../../utils/contentfulPosts'
 interface IMostPopular {
-  post: ContentfulPost
+  content: IPost[]
 }
 
-export default function MostPopular({ post }: IMostPopular) {
-  const { title, category, publishedDate: date, featuredImage, author, slug} = post
-    let { file, description } = featuredImage.fields
+export default function MostPopular({ content }: IMostPopular) {
 
     return (
-        <div className="post--popular">
-            <img width="100%" height="auto" className="post__img" alt={description} src={`https:${file.url}`} />
-            <div className="post__info">
-                <span className="post__category">{category}</span>
-                <h3 className="post__title"><a href={slug}>{title}</a></h3>
-                <div className="publisher">
-                    <span className="post__date">{date}</span>
-                    <span className="post__author">{author}</span>
-                </div>
-            </div>
-            <style jsx global>{`
-        .post {
-          display: inline-block;
-        }
-        .post--popular .post__info {
-          padding: 20px;
-        }
-        .post--popular {
-          width: 333px;
-          margin: 20px;
-        }
-        .post--poular:hover {
-          box-shadow: rgba(0 0 0 0.25) 0px 5px 20px 5px;
-        }
-        .post--popular .post__title {
-          color: rgb(42, 48, 57);
-          font-size: 22px;
-          margin: 10px 0;
-        }
-        .post--popular .post__title a {
-          color: rgb(42, 48, 57);
-          font-size: 22px;
-          margin: 0;
-        }
-        .post--popular .post__category {
-          color: rgb(11, 106, 230);
-          font-size: 16px;
-        }
-        .post--popular .publisher span {
-          display: inline-block;
-          margin-right: 20px;
-          color: rgb(11, 106, 230);
-          font-size: 16px;
-          color: rgb(42, 48, 57);
-        }
-      `}</style>
+      <>
+        <h2 className="section-title">MOST POPULAR</h2>
+        <div className="contentful-section most-popular">      
+          {content.slice(0, 6).map((p, i) => {
+              return <Post {...p} type='standard' />;
+            })}
         </div>
+        <style jsx global>{`
+            .most-popular {
+              display: flex;
+              justify-content: space-around;
+              flex-wrap: wrap;
+            }
+          `}</style>
+      </>
       )
     }
 

@@ -1,7 +1,11 @@
 // Component Props
-export interface IPost {
+export default interface IPost {
     title: string
     category: string
-    date: string
+    publishedDate: string
+    imageAlt: string
     imageUrl: string
+    slug: string
+    author: string
+    type?: 'featured'| 'secondary'| 'standard'
 }

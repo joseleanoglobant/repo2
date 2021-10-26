@@ -33,4 +33,19 @@ export async function fetchEntries() {
   return []
 }
 
-export default { fetchEntries };
+export function format(entry:ContentfulPost){
+
+  const formattedPost = {
+    title: entry.title,
+    category: entry.category,
+    publishedDate: entry.publishedDate,
+    imageAlt: entry.featuredImage.fields.title,
+    imageUrl: entry.featuredImage.fields.file.url,
+    slug: entry.slug,
+    author: entry.author
+
+  }
+  return (formattedPost)
+}
+
+
