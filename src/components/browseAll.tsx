@@ -16,9 +16,6 @@ export default function BrowseAll({ content }: IBrowseAll) {
     if(categories.indexOf(p.category) === -1 ){
       categories.push(p.category);
     }
-    else {
-      console.log("category already in array");
-    }
   });
 
   return (  
