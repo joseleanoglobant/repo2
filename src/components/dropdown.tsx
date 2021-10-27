@@ -7,30 +7,29 @@ interface IDropdown {
 
 export default function Dropdown({ list, filter}: IDropdown) {
 
-    const [isActive, setActive] = useState("false");
+    const [isActive, setActive] = useState(false);
+    const [browseAll, setBrowseAll] = useState(true);
+    const [placeholder, setPlaceHolder]= useState("Select a category");
 
     const handleToggle = () => {
         setActive(!isActive);
     };
 
-    const dropdownSelect = (opt:string) => {
-        return opt
-    }
-
     return (
+        <>
         <div className="dropdown">
-            <div className={isActive ? "dropdown__closed" : "dropdown__opened"} onClick={handleToggle}>
+            <div className={isActive ? "dropdown__opened" : "dropdown__closed"} onClick={handleToggle}>
                 <ul className="dropdown__list">
                     <li>
-                        <div className="dropdown__placeholder">Select a category</div>
+                        <div className="dropdown__placeholder">{placeholder}</div>
                     </li>
-                    <li>
-                        <span className="dropdown__option" onClick={() => {filter('')}}>BROWSE ALL</span>
-                    </li>
+                    {!browseAll ? <li><span className="dropdown__option" onClick={() => {filter(''); setBrowseAll(true); setPlaceHolder('Select a category')}}>Browse all</span></li>: null}
 
                     {list.map((p:string, i) => {
                         return <li key={p}><span className="dropdown__option" onClick={() => {
                             filter(p);
+                            setBrowseAll(false);
+                            setPlaceHolder(p);
                         }}>{p}</span></li>
                     })}
                 </ul>
@@ -45,6 +44,8 @@ export default function Dropdown({ list, filter}: IDropdown) {
                         z-index: 99;
                     }
                     .dropdown__placeholder {
+                        width: 100%;
+                        position: relative;
                         padding: 18px 20px;
                         -webkit-touch-callout: none; 
                         -webkit-user-select: none; 
@@ -59,10 +60,9 @@ export default function Dropdown({ list, filter}: IDropdown) {
                         border-right: 2px solid;
                         display: inline-block;
                         height: 10px;
-                        margin-left: 90px;
-                        position: relative;
-                        right: 0px;
-                        top: -3px;
+                        position: absolute;
+                        right: 15px;
+                        top: 15px;
                         transform: rotate(45deg);
                         vertical-align: middle;
                         width: 10px;
@@ -73,6 +73,7 @@ export default function Dropdown({ list, filter}: IDropdown) {
                         z-index: 99;
                         overflow: hidden;
                         border: 1px solid #aaa;
+                        border-radius: 5px;
                     }
                     .dropdown .dropdown__opened {
                         height: auto;
@@ -104,9 +105,13 @@ export default function Dropdown({ list, filter}: IDropdown) {
                         border-top: 1px solid rgb(238, 242, 244);
                         display: block;
                     }
+                    .dropdown__list li span:hover {
+                        color: rgb(11,106,230);
+                    }
                 `}</style>
             </div >
         </div>
+        </>
     )
 }
 

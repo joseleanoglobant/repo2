@@ -55,9 +55,11 @@ export default function Post(props: IPost) {
           }
           .post__category {
             color: rgb(11, 106, 230);
+            text-transform: uppercase;
           }
           .post--featured .post__category {
             font-size: 16px;
+            text-transform: uppercase;
           }
           .post--featured .publisher span {
             display: inline-block;
