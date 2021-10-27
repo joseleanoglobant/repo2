@@ -23,6 +23,7 @@ export default function Post(props: IPost) {
       <style jsx global>{`
         .post {
             display: inline-block;
+            font-family: 'Montserrat', sans-serif;
           }
           .post--featured .post__info {
             padding: 20px;
@@ -35,8 +36,19 @@ export default function Post(props: IPost) {
           .post.post--standard {
             width: 30%;
             flex-grow: revert;
-            margin-bottom: 40px;
+            margin: 0 18px 40px;
           }
+          .post.post--standard .post__title{
+            height: 84px;
+          }
+          .post.post--standard .post__title a {
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+
           .post.post--standard .post__info{
             padding: 20px;
           }
@@ -48,6 +60,10 @@ export default function Post(props: IPost) {
             font-size: 22px;
             margin: 10px 0;
           }
+          .post .post__title {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.5;
+          }
           .post--featured .post__title a {
             color: rgb(42, 48, 57);
             font-size: 22px;
@@ -56,9 +72,7 @@ export default function Post(props: IPost) {
           .post__category {
             color: rgb(11, 106, 230);
             text-transform: uppercase;
-          }
-          .post--featured .post__category {
-            font-size: 16px;
+            font-size: 14px;
             text-transform: uppercase;
           }
           .post--featured .publisher span {
@@ -89,13 +103,14 @@ export default function Post(props: IPost) {
             width: calc(100% - 200px);
           }
           .post--secondary .post__category {
+            display: inline-block;
             color: rgb(11, 106, 230);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: normal;
+            margin-bottom: 5px;
           }
           .post--secondary .post__title {
             font-size: 16px;
-            font-weight: 400;
             margin: 0;
             overflow: hidden;
           }
@@ -107,6 +122,17 @@ export default function Post(props: IPost) {
           }
           .post--secondary .publisher {
             display: none;
+          }
+          .post .publisher .post__date {
+            display: inline-block;
+            color: rgb(42, 48, 57);
+            margin-right: 20px;
+            font-size: 14px;
+          }
+          .post .publisher .post__author {
+            display: inline-block;
+            color: rgb(42, 48, 57);
+            font-size: 14px;
           }
       `}</style>
     </div>

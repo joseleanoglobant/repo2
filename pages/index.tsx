@@ -28,9 +28,11 @@ export default function Home({ posts }: HomeProps) {
       </main>
       <>
         <style jsx global>{`
+          @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+          
           body {
             background: rgb(242, 248, 251);
-            font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+            font-family: 'Montserrat', sans-serif;
           }
           main {
             background: #fff;

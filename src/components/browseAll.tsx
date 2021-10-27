@@ -39,8 +39,9 @@ export default function BrowseAll({ content }: IBrowseAll) {
       <style jsx global>{`
             .browse-all {
               display: flex;
-              justify-content: space-around;
+              justify-content: left;
               flex-wrap: wrap;
+              flex-grow: 3;
             }
             .section-title-container {
               display: flex;
