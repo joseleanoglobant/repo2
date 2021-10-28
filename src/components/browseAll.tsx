@@ -11,6 +11,10 @@ export default function BrowseAll({ content }: IBrowseAll) {
 
   const categories: string[] = [];
   const [categoryFilter, setCategoryFilter] = useState('');
+  const [postLimit, setPostLimit] = useState(9);
+
+  const contentLimit:number = content.length;
+
 
   content.map((p) => {
     if(categories.indexOf(p.category) === -1 ){
@@ -28,11 +32,11 @@ export default function BrowseAll({ content }: IBrowseAll) {
         {content.filter((val)=>{
           if(categoryFilter === '' || val.category.toLowerCase() === categoryFilter.toLowerCase()) {
             return val
-          }}).slice(0, 9).map((p, i) => {
-            return <Post {...p} type='standard' />;
+          }}).slice(0, postLimit).map((p, i) => {
+            return <Post {...p} key={`browseAll-${p.slug}`} type='standard' />;
         })}
       </div>
-      <a className="browse-all__load-more"href="#">Load More</a>
+      <span className="browse-all__load-more" onClick={() => {setPostLimit(contentLimit);}}>Load More</span>
       <style jsx global>{`
             .browse-all {
               display: flex;
