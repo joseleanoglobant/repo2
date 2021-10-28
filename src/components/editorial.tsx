@@ -15,7 +15,7 @@ export default function Editorial({ content }: IEditorial) {
       </div>
       <div className="editorial__secondary">
         {content.slice(1, 4).map((p, i) => {
-          return <Post {...p} type='secondary' />;
+          return <Post {...p} key={`editorial-${p.slug}`} type='secondary' />;
         })}
       </div>
       <style jsx global>{`
