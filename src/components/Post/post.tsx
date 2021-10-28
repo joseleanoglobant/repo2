@@ -38,6 +38,11 @@ export default function Post(props: IPost) {
             flex-grow: revert;
             margin: 0 18px 40px;
           }
+          .post.post--standard:hover {
+            box-shadow: rgb(0 0 0 / 25%) 0px 5px 20px 5px;
+            transform: translateY(-5px);
+            transition: all 0.4s ease 0s;
+          }
           .post.post--standard .post__title{
             height: 84px;
           }
