@@ -13,7 +13,7 @@ export default function BrowseAll({ content }: IBrowseAll) {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [postLimit, setPostLimit] = useState(9);
 
-  const contentLimit:number = content.length;
+  const contentLimit:number = postLimit + 9;
 
 
   content.map((p) => {
@@ -36,7 +36,7 @@ export default function BrowseAll({ content }: IBrowseAll) {
             return <Post {...p} key={`browseAll-${p.slug}`} type='standard' />;
         })}
       </div>
-      <span className="browse-all__load-more" onClick={() => {setPostLimit(contentLimit);}}>Load More</span>
+      {postLimit <= content.length ? <span className="browse-all__load-more" onClick={() => {if(postLimit <= content.length){setPostLimit(contentLimit)}}}>Load More</span> : null }
       <style jsx global>{`
             .browse-all {
               display: flex;
