@@ -2,33 +2,26 @@ import Post from '../components/Post/post';
 import IPost from '../components/Post/index';
 import Dropdown from './dropdown';
 import React, { useState } from "react";
+import ICategories from './categories/categories';
 
 interface IBrowseAll {
-  content: IPost[]
+  content: IPost[],
+  categories: ICategories[]
 }
 
-export default function BrowseAll({ content }: IBrowseAll) {
+export default function BrowseAll({ content, categories }:IBrowseAll) {
 
-  const categories: string[] = [];
   const [categoryFilter, setCategoryFilter] = useState('');
   const [postLimit, setPostLimit] = useState(9);
 
   const contentLimit: number = postLimit + 9;
 
 
-  content.map((p) => {
-    if (categories.indexOf(p.category) === -1) {
-      categories.push(p.category);
-    }
-  });
-
   const currentContent = content.filter((val) => {
     if (categoryFilter === '' || val.category.toLowerCase() === categoryFilter.toLowerCase()) {
       return val
     }
   }).slice(0, postLimit);
-
-  console.log("currentContent", currentContent)
 
   return (
     <>

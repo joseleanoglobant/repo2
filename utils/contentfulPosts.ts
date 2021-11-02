@@ -25,8 +25,10 @@ export interface ContentfulPost {
   body: string
 }
 
-export async function fetchEntries() {
-  const entries: EntryCollection<ContentfulPost> = await client.getEntries();
+export async function fetchEntries(contentType:'post' | 'categories') {
+  const entries: EntryCollection<ContentfulPost> = await client.getEntries({
+    content_type: contentType
+  });
   if (entries.items) return entries.items;
   console.log(`Error getting Contentful entries.`);
 
@@ -43,7 +45,6 @@ export function format(entry:ContentfulPost){
     imageUrl: entry.featuredImage.fields.file.url,
     slug: entry.slug,
     author: entry.author
-
   }
   return (formattedPost)
 }

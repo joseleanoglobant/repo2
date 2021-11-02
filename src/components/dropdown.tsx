@@ -1,7 +1,8 @@
 import React, { SetStateAction, useState } from "react";
+import ICategories from './categories/categories';
 
 interface IDropdown {
-    list: string[],
+    list: ICategories[],
     filter: React.Dispatch<SetStateAction<string>>
 }
 
@@ -25,12 +26,13 @@ export default function Dropdown({ list, filter}: IDropdown) {
                     </li>
                     {!browseAll ? <li><span className="dropdown__option" onClick={() => {filter(''); setBrowseAll(true); setPlaceHolder('Select a category')}}>Browse all</span></li>: null}
 
-                    {list.map((p:string, i) => {
-                        return <li key={p}><span className="dropdown__option" onClick={() => {
-                            filter(p);
+                    {list.map((p, i) => {
+
+                        return <li key={p.category}><span className="dropdown__option" onClick={() => {
+                            filter(p.category);
                             setBrowseAll(false);
-                            setPlaceHolder(p);
-                        }}>{p}</span></li>
+                            setPlaceHolder(p.category);
+                        }}>{p.category}</span></li>
                     })}
                 </ul>
                 <style jsx global>{`
