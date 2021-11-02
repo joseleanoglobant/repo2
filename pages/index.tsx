@@ -7,12 +7,15 @@ import Editorial from "../src/components/editorial";
 import MostPopular from "../src/components/mostPopular";
 import BrowseAll from "../src/components/browseAll";
 import IPost from '../src/components/Post/index'
+import ICategories from '../src/components/categories/categories'
+
 
 interface HomeProps {
-  posts: IPost[];
+  posts: IPost[],
+  categories: ICategories[]
 }
 
-export default function Home({ posts }: HomeProps) {
+export default function Home({ posts, categories }: HomeProps) {
 
   return (
     <div className="container">
@@ -24,7 +27,7 @@ export default function Home({ posts }: HomeProps) {
       <main>
         <Editorial content={posts}/>
         <MostPopular content={posts}/>
-        <BrowseAll content={posts}/>
+        <BrowseAll content={posts} categories={categories}/>
       </main>
       <>
         <style jsx global>{`
@@ -70,18 +73,23 @@ export default function Home({ posts }: HomeProps) {
 
 
 export async function getStaticProps() {
-  const res = await fetchEntries();
-  const entries = await res.map((p) => {
+  const resPosts = await fetchEntries('post');
+  const resCategories = await fetchEntries('categories');
 
+  const posts = await resPosts.map((p) => {
     const item  = format(p.fields);
     return item;
   });
-  // New array by adding more posts.
-  let posts = entries.concat(entries, entries, entries);
-  console.log(posts.length);
+
+  const categories = await resCategories.map((p) => {
+    const category = p.fields;
+    return category;
+  });
+  
   return {
     props: {
       posts,
+      categories
     },
   };
 }

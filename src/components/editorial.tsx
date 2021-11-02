@@ -23,6 +23,7 @@ export default function Editorial({ content }: IEditorial) {
             justify-content: space-between;
           }
           .editorial__primary {
+            width: 706px;
             margin:0 20px;
           }
           .editorial__secondary {
@@ -30,6 +31,7 @@ export default function Editorial({ content }: IEditorial) {
             flex-direction: column;
             justify-content: space-between;
             margin: 0 20px;
+            width: 373px;
           }
         `}</style>
     </div>
