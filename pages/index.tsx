@@ -71,14 +71,12 @@ export default function Home({ posts }: HomeProps) {
 
 export async function getStaticProps() {
   const res = await fetchEntries();
-  const entries = await res.map((p) => {
+  const posts = await res.map((p) => {
 
     const item  = format(p.fields);
     return item;
   });
-  // New array by adding more posts.
-  let posts = entries.concat(entries, entries, entries);
-  console.log(posts.length);
+  
   return {
     props: {
       posts,
