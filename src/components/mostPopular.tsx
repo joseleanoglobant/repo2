@@ -12,7 +12,7 @@ export default function MostPopular({ content }: IMostPopular) {
         <h2 className="section-title">MOST POPULAR</h2>
         <div className="contentful-section most-popular">      
           {content.slice(0, 6).map((p, i) => {
-              return <Post {...p} type='standard' />;
+              return <Post {...p} key={`mostPopular-${p.slug}`} type='standard' />;
             })}
         </div>
         <style jsx global>{`
