@@ -4,7 +4,7 @@ import Dropdown from './dropdown';
 import React, { useState } from "react";
 
 interface IBrowseAll {
-  content:  IPost[]
+  content: IPost[]
 }
 
 export default function BrowseAll({ content }: IBrowseAll) {
@@ -13,30 +13,37 @@ export default function BrowseAll({ content }: IBrowseAll) {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [postLimit, setPostLimit] = useState(9);
 
-  const contentLimit:number = postLimit + 9;
+  const contentLimit: number = postLimit + 9;
 
 
   content.map((p) => {
-    if(categories.indexOf(p.category) === -1 ){
+    if (categories.indexOf(p.category) === -1) {
       categories.push(p.category);
     }
   });
 
-  return (  
+  const currentContent = content.filter((val) => {
+    if (categoryFilter === '' || val.category.toLowerCase() === categoryFilter.toLowerCase()) {
+      return val
+    }
+  }).slice(0, postLimit);
+
+  console.log("currentContent", currentContent)
+
+  return (
     <>
       <div className="section-title-container">
         <h2 className="section-title">BROWSE ALL</h2>
-        <Dropdown list={categories} filter={setCategoryFilter}/>
+        <Dropdown list={categories} filter={setCategoryFilter} />
       </div>
       <div className="contentful-section browse-all">
-        {content.filter((val)=>{
-          if(categoryFilter === '' || val.category.toLowerCase() === categoryFilter.toLowerCase()) {
-            return val
-          }}).slice(0, postLimit).map((p, i) => {
-            return <Post {...p} key={`browseAll-${p.slug}`} type='standard' />;
+        {currentContent.map((p, i) => {
+          return <Post {...p} key={`browseAll-${p.slug}`} type='standard' />;
         })}
       </div>
-      {postLimit <= content.length ? <span className="browse-all__load-more" onClick={() => {if(postLimit <= content.length){setPostLimit(contentLimit)}}}>Load More</span> : null }
+      {postLimit <= content.length && 
+        <span className="browse-all__load-more" onClick={() => postLimit <= content.length && setPostLimit(contentLimit) }>Load More</span> 
+        }
       <style jsx global>{`
             .browse-all {
               display: flex;
