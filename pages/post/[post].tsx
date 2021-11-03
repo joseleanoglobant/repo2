@@ -17,9 +17,16 @@ interface HomeProps {
     content: IContent
 }
 
+interface IBody {
+    data: {}
+    marks: {}
+    nodeType: string
+    value: string
+}
+
 export default function Home({ content }: HomeProps){
 
-    //console.log('content', content.body.content[0].content[0].value);
+    console.log('content', content.body.content[0].content[0]);
 
     const { title, category, publishedDate, author } = content;
     const imageAlt = content.featuredImage.fields.title;
@@ -35,7 +42,7 @@ export default function Home({ content }: HomeProps){
                             <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
                         </div>
                         <div className="post-detail__body">
-                            {content.body.content.map((p, i:number) => {
+                            {content.body.content.map((p:any, i:number) => {
                                 return <p key={`body__text-${i}`} className="body__text">{p.content[0].value} </p>
                             })}
                         </div>
