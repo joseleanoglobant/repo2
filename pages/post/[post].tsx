@@ -130,7 +130,7 @@ export async function getStaticPaths() {
     return { paths: cornucopia, fallback: false }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params } : any) {
 
     const res = await fetchEntries('post')
     const content = await res
