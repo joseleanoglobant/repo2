@@ -1,4 +1,5 @@
 import IPost from '../Post/index';
+import Link from 'next/link'
 
 export default function Post(props: IPost) {
 
@@ -7,13 +8,15 @@ export default function Post(props: IPost) {
   return (
     <div className={`post post--${type}`}>
       <div className="post__image">
-        <a href={slug}>
-          <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
-        </a>
+        <Link href={`/post/${slug}`}>
+          <a>
+            <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
+          </a>
+        </Link>
       </div>
       <div className="post__info">
         <span className="post__category">{category}</span>
-        <h3 className="post__title"><a href={slug}>{title}</a></h3>
+        <h3 className="post__title"><Link href={`/post/${slug}`}><a>{title}</a></Link></h3>
         <div className="publisher">
           <span className="post__date">{publishedDate}</span>
           <span className="post__author">{author}</span>
