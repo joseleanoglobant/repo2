@@ -1,31 +1,29 @@
-import { useRouter } from 'next/router'
 import { fetchEntries } from "../../utils/contentfulPosts";
-import Link from 'next/link'
+import { Asset } from "contentful";
 
-
-interface HomeProps {
+interface IContent {
     title: string
     category: string
     publishedDate: string
+    featuredImage: Asset
     imageAlt: string
     imageUrl: string
     slug: string
     author: string
-    body: string
-  }
+    body: any
+}
+
+interface HomeProps {
+    content: IContent
+}
 
 export default function Home({ content }: HomeProps){
 
-    const item = content.body.content.map((p) => {
-        return console.log(p.content[0].value);
-    })
-
-    console.log('content', content.body.content[0].content[0].value);
+    //console.log('content', content.body.content[0].content[0].value);
 
     const { title, category, publishedDate, author } = content;
     const imageAlt = content.featuredImage.fields.title;
     const imageUrl = content.featuredImage.fields.file.url;
-    const elem = content.body.content[0].content[0].value;
 
     return (
         <>
@@ -37,8 +35,8 @@ export default function Home({ content }: HomeProps){
                             <img width="100%" height="auto" className="post__img" alt={imageAlt} src={`https:${imageUrl}`} />
                         </div>
                         <div className="post-detail__body">
-                            {content.body.content.map((p) => {
-                                return <p className="body__text">{p.content[0].value} </p>
+                            {content.body.content.map((p, i:number) => {
+                                return <p key={`body__text-${i}`} className="body__text">{p.content[0].value} </p>
                             })}
                         </div>
                     </div>
